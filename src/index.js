@@ -1,7 +1,24 @@
 import x from "./x.js";
-console.log(x);
-console.log("123");
-console.log("第二次实验");
-console.log("第三次实验");
-console.log("第五次实验");
+import img from "./assets/1.jpg";
 
+const div = document.getElementById("app1");
+console.log(div);
+div.innerHTML = `
+<img src="${img}">`;
+
+const button = document.createElement("button");
+button.innerText = "懒加载";
+button.onclick = () => {
+  const promise = import("./lazy");
+  promise.then(
+    (module) => {
+      const fn = module.default;
+      fn();
+    },
+    () => {
+      console.log("失败了");
+    }
+  );
+};
+
+div.appendChild(button);

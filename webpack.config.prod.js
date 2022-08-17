@@ -9,6 +9,7 @@ module.exports = {
   mode: "production", // 用户模式
   module: {
     rules: [
+      ...base.module.rules,
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
