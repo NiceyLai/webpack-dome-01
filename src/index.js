@@ -22,3 +22,4 @@ button.onclick = () => {
 };
 
 div.appendChild(button);
+console.log("实验");
