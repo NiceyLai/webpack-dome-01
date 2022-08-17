@@ -6,17 +6,21 @@ const base = require("./webpack.config.base.js");
 
 module.exports = {
   ...base,
-  mode: "development", // 开发者模式
-  devtool: "inline-source-map",
-  devServer: {
-    static: "./dist",
-  },
+  mode: "production", // 用户模式
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
+  plugins: [
+    ...base.plugins,
+    new MiniCssExtractPlugin({
+      filename: "x.[contenthash].css",
+      chunkFilename: "x.[contenthash].css",
+      ignoreOrder: false,
+    }),
+  ],
 };
